@@ -10,23 +10,37 @@ public class RecentlyUsedList<T> implements Iterable<T> {
     }
 
     public void addToList(T item) {
+        deletePossibleDuplicate(item);
         myList.add(item);
     }
 
-    public void accessItems() {
+    public void deletePossibleDuplicate(T item) {
+        Iterator<T> iterator = myList.iterator();
+        while (iterator.hasNext()) {
+            System.out.println("iterator has next");
+            T comparedItem = iterator.next();
+            System.out.println(comparedItem.toString());
+            if (item.equals(comparedItem)) {
+                System.out.println("there is a duplicate");
+                myList.remove(item);
+            }
+        }
+    }
+
+    public void printItems() {
         if (myList.size() > 0) {
-            printItems();
+            printList();
         } else {
             printMessage("There are no items in the list");
         }
     }
 
-    public void printItems() {
+    public void printList() {
         System.out.println(String.format("Recently used objects of class %s:", myList.get(0).getClass().getName()));
         int count = 0;
         for (T item : myList) {
             count++;
-            System.out.println(String.format("%d. %s", count, item));
+            System.out.println(String.format("%d. %s", count, item.toString()));
         }
     }
 
@@ -36,7 +50,7 @@ public class RecentlyUsedList<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             private int currentIndex = 0;
 
             @Override
