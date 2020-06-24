@@ -4,12 +4,10 @@ public class Main {
         String obj2 = "Mandarynka";
         String obj3 = "Klaustrofobia";
         String obj4 = "Klaustrofobia";
+        String obj5 = "Blablabla";
 
-        RecentlyUsedList<String> list = new RecentlyUsedList<>();
-        list.addToList(obj1);
-        list.addToList(obj2);
-        list.addToList(obj3);
-        list.addToList(obj4);
+        RecentlyUsedList<String> list = new RecentlyUsedList<>(3);
+        list.addItemsToList(obj1, obj2, obj3, obj4, obj5);
         list.printItems();
     }
 }

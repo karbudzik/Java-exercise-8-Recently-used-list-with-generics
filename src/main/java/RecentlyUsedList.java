@@ -4,27 +4,37 @@ import java.util.List;
 
 public class RecentlyUsedList<T> implements Iterable<T> {
     private List<T> myList;
+    private final int NUMBER_OF_ITEMS;
 
-    public RecentlyUsedList() {
+    public RecentlyUsedList(int numberOfItems) {
         this.myList = new ArrayList<>();
+        this.NUMBER_OF_ITEMS = numberOfItems;
     }
 
-    public void addToList(T item) {
+    public void addItemToList(T item) {
         deletePossibleDuplicate(item);
-        myList.add(item);
+        myList.add(0, item);
+        deleteElementsAboveAllowedNumber();
+    }
+
+    public void addItemsToList(T ...items) {
+        for (T item : items) {
+            addItemToList(item);
+        }
     }
 
     public void deletePossibleDuplicate(T item) {
-        Iterator<T> iterator = myList.iterator();
+        Iterator<T> iterator = iterator();
         while (iterator.hasNext()) {
-            System.out.println("iterator has next");
             T comparedItem = iterator.next();
-            System.out.println(comparedItem.toString());
             if (item.equals(comparedItem)) {
-                System.out.println("there is a duplicate");
-                myList.remove(item);
+                myList.remove(comparedItem);
             }
         }
+    }
+
+    public void deleteElementsAboveAllowedNumber() {
+        myList.removeIf(u -> myList.indexOf(u) > (NUMBER_OF_ITEMS-1));
     }
 
     public void printItems() {
