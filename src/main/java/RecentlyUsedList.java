@@ -58,6 +58,10 @@ public class RecentlyUsedList<T> implements Iterable<T> {
         System.out.println(message);
     }
 
+    public List<T> getMyList() {
+        return myList;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
