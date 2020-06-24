@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RecentlyUsedList<T> implements Iterable<T> {
-    private List<T> myList;
+    private final List<T> myList;
     private final int NUMBER_OF_ITEMS;
 
     public RecentlyUsedList(int numberOfItems) {
@@ -35,27 +35,6 @@ public class RecentlyUsedList<T> implements Iterable<T> {
 
     public void deleteElementsAboveAllowedNumber() {
         myList.removeIf(u -> myList.indexOf(u) > (NUMBER_OF_ITEMS-1));
-    }
-
-    public void printItems() {
-        if (myList.size() > 0) {
-            printList();
-        } else {
-            printMessage("There are no items in the list");
-        }
-    }
-
-    public void printList() {
-        System.out.println(String.format("Recently used objects of class %s:", myList.get(0).getClass().getName()));
-        int count = 0;
-        for (T item : myList) {
-            count++;
-            System.out.println(String.format("%d. %s", count, item.toString()));
-        }
-    }
-
-    public void printMessage(String message) {
-        System.out.println(message);
     }
 
     public List<T> getMyList() {
