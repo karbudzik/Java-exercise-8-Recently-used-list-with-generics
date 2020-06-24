@@ -3,10 +3,10 @@ import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RecentlyUsedListTest {
-
-    private final RecentlyUsedList<String> stringList = new RecentlyUsedList<>(4);
-    private final RecentlyUsedList<Integer> integerList = new RecentlyUsedList<>(4);
-    private final RecentlyUsedList<User> userList = new RecentlyUsedList<>(4);
+    private final int LIST_SIZE = 4;
+    private final RecentlyUsedList<String> stringList = new RecentlyUsedList<>(LIST_SIZE);
+    private final RecentlyUsedList<Integer> integerList = new RecentlyUsedList<>(LIST_SIZE);
+    private final RecentlyUsedList<User> userList = new RecentlyUsedList<>(LIST_SIZE);
 
     @Test
     public void shouldPlaceElementsInTheRightOrder() {
@@ -56,5 +56,16 @@ public class RecentlyUsedListTest {
         assertEquals(3, stringList.getMyList().size());
         assertEquals(2, integerList.getMyList().size());
         assertEquals(2, userList.getMyList().size());
+    }
+
+    @Test
+    public void shouldHaveConstantSize() {
+        //given
+        stringList.addItemsToList("item1", "item2", "item3", "item4", "item5", "item6", "item1");
+        integerList.addItemsToList(1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5);
+
+        //then
+        assertEquals(LIST_SIZE, stringList.getMyList().size());
+        assertEquals(LIST_SIZE, integerList.getMyList().size());
     }
 }
