@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RecentlyUsedList<T> implements Iterable<T> {
-    private final List<T> myList;
+    private List<T> myList;
     private final int NUMBER_OF_ITEMS;
 
     public RecentlyUsedList(int numberOfItems) {
@@ -31,6 +33,10 @@ public class RecentlyUsedList<T> implements Iterable<T> {
                 myList.remove(comparedItem);
             }
         }
+
+//        myList = myList.stream()
+//                .distinct()
+//                .collect(Collectors.toList());
     }
 
     public void deleteElementsAboveAllowedNumber() {
