@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RecentlyUsedList<T> implements Iterable<T> {
     private List<T> myList;
@@ -26,17 +24,11 @@ public class RecentlyUsedList<T> implements Iterable<T> {
     }
 
     public void deletePossibleDuplicate(T item) {
-        Iterator<T> iterator = iterator();
-        while (iterator.hasNext()) {
-            T comparedItem = iterator.next();
+        for (T comparedItem : this) {
             if (item.equals(comparedItem)) {
                 myList.remove(comparedItem);
             }
         }
-
-//        myList = myList.stream()
-//                .distinct()
-//                .collect(Collectors.toList());
     }
 
     public void deleteElementsAboveAllowedNumber() {
